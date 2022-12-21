@@ -18,6 +18,22 @@ const nav__links = [
     display: "Fruits",
     path: "/all-fruits",
   },
+  {
+    display: "Service",
+    path: "/service",
+  },
+  {
+    display: "Testimonial",
+    path: "/testimonial",
+  },
+  {
+    display: "About",
+    path: "/about",
+  },
+  {
+    display: "Contact",
+    path: "/contact",
+  },
 ];
 
 const Header = () => {

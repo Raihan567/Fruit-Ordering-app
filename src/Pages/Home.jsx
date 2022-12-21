@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "reactstrap";
+import { Col, Container, ListGroup, ListGroupItem, Row } from "reactstrap";
 import Helmet from "../Components/Helmet/Helmet";
 import heroImg from "../../public/delivery-boy-1.jpg";
 // import heroImg from "../assets/images/hero.png";
@@ -16,9 +16,21 @@ import productImg02 from "../assets/images/pizza.png";
 import productImg03 from "../assets/images/bread.png";
 import ProductCard from "../Components/ProductCard/ProductCard";
 
+import networkImg from "../assets/images/network.png";
+import About from "../Components/About/About";
+import TestimonialSlider from "../Components/Ui/TestimonialSlider";
+import Testimonial from "../Components/Testimonial/Testimonial";
+
 const Home = () => {
   const [category, setCategory] = useState("ALL");
   const [allProducts, setAllProducts] = useState(products);
+  const [hotPizza, setHotPizza] = useState([]);
+
+  useEffect(() => {
+    const filteredPizza = products.filter((item) => item.category === "Pizza");
+    const slicedPizza = filteredPizza.slice(0, 4);
+    setHotPizza(slicedPizza);
+  }, []);
 
   useEffect(() => {
     if (category === "ALL") {
@@ -78,12 +90,12 @@ const Home = () => {
                   </motion.button>
                 </div>
 
-                <div className="d-flex align-items-center gap-5 mt-3">
+                <div className="facilities d-flex align-items-center gap-5 mt-3">
                   <p className="d-flex align-items-center gap-2">
                     <span className="shipping__icon">
-                      <i className="ri-car-line"></i> No
+                      <i className="ri-car-line"></i>
                     </span>
-                    Shopping charge
+                    No Shopping charge
                   </p>
                   <p className="d-flex align-items-center gap-2 ">
                     <span className="shipping__icon">
@@ -157,12 +169,46 @@ const Home = () => {
 
             {/* Product render */}
             {allProducts.map((item, index) => (
+              <Col lg="3" md="4"  key={index}>
+                <ProductCard item={item} />
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+
+      {/* About Section  */}
+      <section>
+        <About />
+      </section>
+
+      {/* Popular fruits */}
+      <section className="pt-0">
+        <Container>
+          <Row>
+            <Col lg="12" className="text-center ">
+              <h2>Hot Pizza</h2>
+              <p className="mt-4 text-muted">
+                Members of Strictly Couple 2016 and 2017 Jake Mason and Laurence{" "}
+                <br />
+                Fox An unrivaled ensemble cast of irresistible personalities,
+                incendiary chemistry, dazzling dance routines, and a superb live
+                band
+              </p>
+            </Col>
+
+            {hotPizza.map((item, index) => (
               <Col lg="3" md="4" key={index}>
                 <ProductCard item={item} />
               </Col>
             ))}
           </Row>
         </Container>
+      </section>
+
+      {/* Testimonial */}
+      <section>
+        <Testimonial />
       </section>
     </Helmet>
   );

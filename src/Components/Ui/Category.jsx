@@ -35,7 +35,7 @@ const Category = () => {
           <Col lg="3" md="4" key={index}>
             <motion.div
               whileHover={{ scale: 1.1 }}
-              className="category__item d-flex align-items-center gap-3 "
+              className="category__item d-flex align-items-center gap-3 mt-3"
             >
               <div className="category__img">
                 <img src={item.imgUrl} alt="" />

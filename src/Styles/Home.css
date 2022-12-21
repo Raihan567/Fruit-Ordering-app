@@ -47,3 +47,45 @@
   color: #000 !important;
   border-radius: 5px;
 }
+
+@media only screen and (max-width: 768px) {
+  .hero__title {
+    font-size: 2rem;
+  }
+  .hero__content h1 {
+    font-size: 1.7rem;
+    line-height: 30px;
+  }
+  .hero__content p {
+    font-size: 0.9rem;
+    line-height: 20px;
+  }
+  .facilities p {
+    display: none !important;
+  }
+  .order__btn,
+  .all__fruits-btn {
+    font-size: 0.8rem !important;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .hero__title {
+    font-size: 1.3rem;
+  }
+  .hero__content h1 {
+    font-size: 1.4rem;
+    line-height: 20px;
+  }
+  .hero__content p {
+    font-size: 0.9rem;
+    line-height: 20px;
+  }
+  .order__btn,
+  .all__fruits-btn {
+    font-size: 0.7rem !important;
+  }
+  .facilities p {
+    display: none !important;
+  }
+}

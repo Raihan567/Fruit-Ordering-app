@@ -60,6 +60,13 @@
   font-weight: 600;
   display: none;
 }
+.header__sticky {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background: #fff;
+  z-index: 99999;
+}
 
 @media only screen and (max-width: 992px) {
   .logo img {

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import logo from "../../../public/fav-icon.png";
 import { Link, NavLink } from "react-router-dom";
 import { Container } from "reactstrap";
@@ -38,9 +38,27 @@ const nav__links = [
 
 const Header = () => {
   const menuRef = useRef(null);
+  const headerRef = useRef(null);
+
   const toggleMenu = () => menuRef.current.classList.toggle("show__menu");
+
+  // useEffect(() => {
+  //   window.addEventListener("scroll", () => {
+  //     if (
+  //       document.body.scrollTop > 80 ||
+  //       document.documentElement.scrollTop > 80
+  //     ) {
+  //       headerRef.current.classList.add("header__sticky");
+  //     } else {
+  //       headerRef.current.classList.remove("header__sticky");
+  //     }
+  //   });
+
+  //   return () => window.removeEventListener("scroll");
+  // }, []);
+
   return (
-    <header className="header">
+    <header className="header sticky-top bg-white"  >
       <Container>
         <div className="nav__wrapper d-flex align-items-center justify-content-between">
           <div className="logo d-flex align-items-center  gap-1">

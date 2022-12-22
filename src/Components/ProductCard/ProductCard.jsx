@@ -1,12 +1,28 @@
 import { motion } from "framer-motion";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { cartActions } from "../../Redux/Slices/CartSlice";
 import "../../Styles/ProductCard.css";
 
 const ProductCard = ({ item }) => {
   const { id, title, price, desc, category, image01, image02, image03 } = item;
+  const dispatch = useDispatch();
+
+  // Add to Cart
+  const addToCart = () => {
+    dispatch(
+      cartActions.addItem({
+        id,
+        title,
+        image01,
+        price,
+      })
+    );
+  };
+
   return (
-    <motion.div  className="product__item mt-5">
+    <motion.div className="product__item mt-5">
       <div className="product__img">
         <Link to={`/all-fruits/${id}`}>
           <motion.img
@@ -24,7 +40,11 @@ const ProductCard = ({ item }) => {
         </h5>
         <div className="d-flex justify-content-between mt-4 price__content">
           <span className="product__price ">${price}</span>
-          <motion.button whileTap={{ scale: 1.2 }} className="addToCart__btn ">
+          <motion.button
+            onClick={addToCart}
+            whileTap={{ scale: 1.2 }}
+            className="addToCart__btn "
+          >
             Add to Cart
           </motion.button>
         </div>

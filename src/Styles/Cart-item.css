@@ -14,12 +14,20 @@
   font-weight: 600;
 }
 .delete__btn {
-  background: #df2020;
+  background: #333;
   width: 25px;
   text-align: center;
   height: 25px;
   color: #fff;
   font-weight: 600;
   border-radius: 50%;
+  cursor: pointer;
+}
+
+.increase__decrease-btn {
+  background-color: rgba(241, 7, 7, 0.164);
+}
+.increase__btn,
+.decrease__btn {
   cursor: pointer;
 }

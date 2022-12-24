@@ -8,6 +8,7 @@ const CartUiSlice = createSlice({
   name: "cartUi",
   initialState,
   reducers: {
+    // Toggle close button
     toggle(state) {
       state.cartVisible = !state.cartVisible;
     },

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
+import { RotatingLines } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Col, Container, FormGroup, Row } from "reactstrap";
 import Helmet from "../components/Helmet/Helmet";
 import "../Styles/Login.css";
 
-// import { signInWithEmailAndPassword } from "firebase/auth";
-// import { auth } from "../firebase.config";
-
-// import { RotatingLines } from "react-loader-spinner";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase.config";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,29 +16,31 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  // const signIn = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
+  //user sign in with email and password
+  const signIn = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-  //   try {
-  //     const userCredential = await signInWithEmailAndPassword(
-  //       auth,
-  //       email,
-  //       password
-  //     );
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-  //     const user = userCredential.user;
-  //     console.log(user);
-  //     setLoading(false);
-  //     toast.success("User logged in successfully");
-  //     navigate("/checkout");
-  //   } catch (error) {
-  //     setLoading(false);
-  //     toast.error(error.message);
-  //   }
-  // };
+      const user = userCredential.user;
+      console.log(user);
+      setLoading(false);
+      toast.success("User logged in successfully");
+      navigate("/checkout");
+    } catch (error) {
+      setLoading(false);
+      toast.error(error.message);
+    }
+  };
   return (
     <Helmet title="Login">
+      {/* ------------Login section---------- */}
       <section className="login__section">
         <Container>
           <Row>
@@ -60,7 +61,7 @@ const Login = () => {
             ) : (
               <Col lg="6" className="m-auto text-center">
                 <h3 className="fs-bold text-center ">Login</h3>
-                <form className="auth__form">
+                <form className="auth__form" onSubmit={signIn}>
                   <FormGroup>
                     <input
                       type="email"
@@ -70,6 +71,7 @@ const Login = () => {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </FormGroup>
+
                   <FormGroup>
                     <input
                       type="password"
@@ -79,12 +81,14 @@ const Login = () => {
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </FormGroup>
+
                   <button
                     type="submit"
                     className="buy__btn auth__btn  text-center"
                   >
                     Login
                   </button>
+                  
                   <p className="mt-2 ">
                     Don't have an account?{" "}
                     <Link className="text-decoration-none" to="/register">

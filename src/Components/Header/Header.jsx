@@ -1,10 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import logo from "../../../public/fav-icon.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, Navigate, NavLink } from "react-router-dom";
 import { Container } from "reactstrap";
 import "../../Styles/Header.css";
 import { useDispatch, useSelector } from "react-redux";
 import { CartUiAction } from "../../Redux/Slices/CartUiSlice";
+import userIcon from "../../assets/images/user-icon.jpg";
+import { motion } from "framer-motion";
+import useAuth from "../../Custom-hooks/useAuth";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase.config";
+import { toast } from "react-toastify";
 
 // Nav links are created
 const nav__links = [
@@ -17,8 +23,8 @@ const nav__links = [
     path: "/cart",
   },
   {
-    display: "Fruits",
-    path: "/all-fruits",
+    display: "Food",
+    path: "/all-foods",
   },
   {
     display: "Service",
@@ -32,22 +38,37 @@ const nav__links = [
     display: "About",
     path: "/about",
   },
-  {
-    display: "Contact",
-    path: "/contact",
-  },
+  // {
+  //   display: "Contact",
+  //   path: "/contact",
+  // },
 ];
 
 const Header = () => {
   const menuRef = useRef(null);
   const headerRef = useRef(null);
+  const profileActionRef = useRef(null);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const dispatch = useDispatch();
-
+  const { currentUser } = useAuth();
   const toggleMenu = () => menuRef.current.classList.toggle("show__menu");
 
   const toggleCart = () => {
     dispatch(CartUiAction.toggle());
+  };
+
+  const toggleProfileActions = () =>
+    profileActionRef.current.classList.toggle("show__ProfileAction");
+
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        toast.success("Logged Out ");
+        Navigate("/home");
+      })
+      .catch((error) => {
+        // toast.error(error.message);
+      });
   };
 
   // useEffect(() => {
@@ -68,11 +89,12 @@ const Header = () => {
   return (
     <header className="header border-bottom sticky-top bg-white">
       <Container>
+        {/* ---------------Header section------------- */}
         <div className="nav__wrapper d-flex align-items-center justify-content-between">
           <div className="logo d-flex align-items-center  gap-1">
             <img className="img-fluid" src={logo} alt="" />
             <h5>
-              <Link to="/home">Fruitsify</Link>
+              <Link to="/home">Foodsify</Link>
             </h5>
           </div>
 
@@ -97,16 +119,69 @@ const Header = () => {
           {/*======== Nav right Icon ============ */}
           <div className="nav__right d-flex gap-3">
             <span className="cart__icon" onClick={toggleCart}>
-                <i className="ri-shopping-bag-line"></i>
+              <i className="ri-shopping-bag-line"></i>
               <span className="cart__badge">{totalQuantity}</span>
             </span>
 
-            <span className="user">
+            {/* <span className="user">
               <Link to="/login">
-                <i className="ri-user-fill"></i>
+                <img className="" src={userIcon} alt="" />
               </Link>
-            </span>
+            </span> */}
+            
+            {/* -----------------Profile Action --------------- */}
+            <div className="profile">
+              <motion.img
+                whileTap={{ scale: 1.2 }}
+                src={currentUser ? currentUser.photoURL : userIcon}
+                // src={userIcon}
+                alt=""
+                onClick={toggleProfileActions}
+              />
 
+              <div
+                className="profile__action"
+                ref={profileActionRef}
+                onClick={toggleProfileActions}
+              >
+                {currentUser ? (
+                  <ul>
+                    <li onClick={logout}>Logout</li>
+                    {/* <li>
+                      <Link
+                        className="text-decoration-none text-black"
+                        to="/dashboard"
+                      >
+                        Dashboard
+                      </Link>
+                    </li> */}
+                  </ul>
+                ) : (
+                  <div className="d-flex align-items-center justify-content-center flex-column text-white rounded">
+                    <Link
+                      className="text-decoration-none text-white py-1"
+                      to="/register"
+                    >
+                      SignUp
+                    </Link>
+                    <Link
+                      className="text-decoration-none text-white py-1"
+                      to="/login"
+                    >
+                      Login
+                    </Link>
+                    {/* <Link
+                      className="text-decoration-none text-black"
+                      to="/login"
+                    >
+                      Dashboard
+                    </Link> */}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* --------------Toggle menu------------- */}
             <span className="mobile__menu" onClick={toggleMenu}>
               <i className="ri-menu-line"></i>
             </span>

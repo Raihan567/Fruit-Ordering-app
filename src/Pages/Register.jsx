@@ -3,15 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { Col, Container, FormGroup, Row } from "reactstrap";
 import Helmet from "../components/Helmet/Helmet";
 import "../Styles/Login.css";
-// import { RotatingLines } from "react-loader-spinner";
+import { RotatingLines } from "react-loader-spinner";
 
-// import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-// import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-// import { setDoc, doc } from "firebase/firestore";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { setDoc, doc } from "firebase/firestore";
 
-// import { auth } from "../firebase.config";
-// import { db } from "../firebase.config";
-// import { storage } from "../firebase.config";
+import { auth } from "../firebase.config";
+import { db } from "../firebase.config";
+import { storage } from "../firebase.config";
 
 import { toast } from "react-toastify";
 
@@ -24,55 +24,57 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  // const signup = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
+  // User Create account
+  const signup = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-  //   try {
-  //     const userCredential = await createUserWithEmailAndPassword(
-  //       auth,
-  //       email,
-  //       password
-  //     );
-  //     const user = userCredential.user;
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
 
-  //     const storageRef = ref(storage, `images/${Date.now() + userName}`);
-  //     const uploadTask = uploadBytesResumable(storageRef, file);
+      const storageRef = ref(storage, `images/${Date.now() + userName}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
 
-  //     uploadTask.on(
-  //       (error) => {
-  //         // Handle unsuccessful uploads
-  //         toast.error(error.message);
-  //       },
-  //       () => {
-  //         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-  //           // update user profile
-  //           await updateProfile(user, {
-  //             displayName: userName,
-  //             photoURL: downloadURL,
-  //           });
+      uploadTask.on(
+        (error) => {
+          // Handle unsuccessful uploads
+          toast.error(error.message);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            // update user profile
+            await updateProfile(user, {
+              displayName: userName,
+              photoURL: downloadURL,
+            });
 
-  //           // Store user data in firebase database
-  //           await setDoc(doc(db, "users", user.uid), {
-  //             uid: user.uid,
-  //             displayName: userName,
-  //             email,
-  //             photoURL: downloadURL,
-  //           });
-  //         });
-  //       }
-  //     );
-  //     toast.success("Account created successfully");
-  //     setLoading(false);
-  //     navigate("/login");
-  //   } catch (error) {
-  //     setLoading(false);
-  //     toast.error("Something went wrong");
-  //   }
-  // };
+            //  Store user data in firebase database
+            await setDoc(doc(db, "users", user.uid), {
+              uid: user.uid,
+              displayName: userName,
+              email,
+              photoURL: downloadURL,
+            });
+          });
+        }
+      );
+      toast.success("Account created successfully");
+      setLoading(false);
+      navigate("/login");
+    } catch (error) {
+      setLoading(false);
+      toast.error("Something went wrong");
+    }
+  };
 
   return (
-    <Helmet title="Signup">
+    <Helmet title="Login">
+      {/* ----------Register section------- */}
       <section className="login__section">
         <Container>
           <Row>
@@ -93,7 +95,7 @@ const Register = () => {
             ) : (
               <Col lg="6" className="m-auto text-center">
                 <h3 className="fs-bold text-center ">Sign-up</h3>
-                <form className="auth__form" >
+                <form className="auth__form" onSubmit={signup}>
                   <FormGroup>
                     <input
                       type="text"
@@ -103,6 +105,7 @@ const Register = () => {
                       onChange={(e) => setUserName(e.target.value)}
                     />
                   </FormGroup>
+
                   <FormGroup>
                     <input
                       type="email"
@@ -112,6 +115,7 @@ const Register = () => {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </FormGroup>
+
                   <FormGroup>
                     <input
                       type="password"
@@ -121,6 +125,7 @@ const Register = () => {
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </FormGroup>
+
                   <FormGroup>
                     <input
                       type="file"
@@ -128,12 +133,14 @@ const Register = () => {
                       onChange={(e) => setFile(e.target.files[0])}
                     />
                   </FormGroup>
+
                   <button
                     type="submit"
                     className="buy__btn auth__btn  text-center"
                   >
                     Creat an account
                   </button>
+
                   <p className="mt-2">
                     Already have an account?{" "}
                     <Link className="text-decoration-none" to="/login">
@@ -143,11 +150,6 @@ const Register = () => {
                 </form>
               </Col>
             )}
-            {/* <Col lg="6  ">
-              <div>
-                <img src={login} alt="" />
-              </div>
-            </Col> */}
           </Row>
         </Container>
       </section>

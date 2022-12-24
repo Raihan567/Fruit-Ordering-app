@@ -15,8 +15,10 @@ const Carts = () => {
   const toggleCart = () => {
     dispatch(CartUiAction.toggle());
   };
+
   return (
     <div className="cart__container">
+      {/* -------------Sidebar Cart Section -------------- */}
       <ListGroup className="cart">
         <div className="cart__close">
           <span onClick={toggleCart}>

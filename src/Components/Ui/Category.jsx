@@ -10,19 +10,19 @@ import categoryImg04 from "../../assets/images/category-04.png";
 
 const categoryData = [
   {
-    display: "Fresh Fruits",
+    display: "Fresh Food",
     imgUrl: categoryImg01,
   },
   {
-    display: "Dry Fruits",
+    display: "Dry Food",
     imgUrl: categoryImg02,
   },
   {
-    display: "Asian Fruits",
+    display: "Asian Food",
     imgUrl: categoryImg03,
   },
   {
-    display: "Citrus Fruits",
+    display: "Citrus Food",
     imgUrl: categoryImg04,
   },
 ];

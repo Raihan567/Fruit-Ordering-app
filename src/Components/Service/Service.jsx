@@ -29,6 +29,7 @@ const featureData = [
 const Service = () => {
   return (
     <>
+      {/* -----------Service Section ----------- */}
       <section id="service">
         <Container className="mt-3">
           <Row>
@@ -49,10 +50,16 @@ const Service = () => {
               </p>
             </Col>
 
+            {/* ------------Mapping Product data ------------- */}
             {featureData.map((item, index) => (
               <Col lg="4" md="6" key={index} className="my-5">
                 <motion.div
-                  whileHover={{ scale: 1.1, backgroundColor:'#fde4e4', padding:'10px', borderRadius:'5px' }}
+                  whileHover={{
+                    scale: 1.1,
+                    backgroundColor: "#fde4e4",
+                    padding: "10px",
+                    borderRadius: "5px",
+                  }}
                   className="feature__item mt-3 text-center"
                 >
                   <img className="w-25 mb-3" src={item.imgUrl} alt="" />

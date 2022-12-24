@@ -8,21 +8,26 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const year = new Date().getFullYear();
   return (
+    // ============Footer Section==============
     <footer className="footer">
       <Container>
         <Row>
+          {/* -------------- First Column -------------- */}
           <Col lg="3" md="4" sm="6">
             <div className="logo text-start  footer__logo ">
               <div className="footer__logo d-flex align-items-center justify-content-start gap-1">
                 <img src={logo} alt="" />
-                <h5>Fruisify</h5>
+                <h5>Foodsify</h5>
               </div>
               <p className="mt-3">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Dignissimos hic eum reiciendis iure voluptate. Magnam eligendi
+                The best food delivery services let you order whatever you want
+                to eat with just the click of a button. Burgers, pizza, sushi, a
+                dish from your favorite local restaurant
               </p>
             </div>
           </Col>
+
+          {/* ---------------Second Column -------------- */}
 
           <Col lg="3" md="4" sm="6">
             <h5 className="footer__title">Delivery Time</h5>
@@ -37,6 +42,9 @@ const Footer = () => {
               </ListGroupItem>
             </ListGroup>
           </Col>
+
+          {/* ---------------Third Column -------------- */}
+
           <Col lg="3" md="4" sm="6">
             <h5 className="footer__title">Contact Us</h5>
             <ListGroup>
@@ -51,6 +59,8 @@ const Footer = () => {
               </ListGroupItem>
             </ListGroup>
           </Col>
+                    {/* ---------------Fourth Column -------------- */}
+
           <Col lg="3" md="4" sm="6">
             <h5 className="footer__title">Newsletter</h5>
             <p>Subscribe our newsletter</p>
@@ -70,7 +80,9 @@ const Footer = () => {
           </Col>
         </Row>
         <hr className="mt-3" />
+
         {/* Copyright and self branding section */}
+        
         <Row className="mt-5">
           <Col lg="6" md="6">
             <p className="copyright__text">

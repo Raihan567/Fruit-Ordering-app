@@ -17,7 +17,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <Provider store={store}>
         <ToastContainer
-          position="bottom-right"
+          // position="bottom-right"
+          position="bottom-center"
           autoClose={3000}
           closeOnClick
           draggable

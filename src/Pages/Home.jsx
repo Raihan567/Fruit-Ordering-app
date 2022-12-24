@@ -32,6 +32,7 @@ const Home = () => {
     setHotPizza(slicedPizza);
   }, []);
 
+  // Product filter by category
   useEffect(() => {
     if (category === "ALL") {
       setAllProducts(products);
@@ -62,6 +63,7 @@ const Home = () => {
   return (
     <Helmet title="Home">
       <section className="height">
+        {/* ------------Home section-------------- */}
         <Container>
           <Row className="d-flex align-items-center justify-content-between">
             {/* Hero Content section */}
@@ -169,7 +171,7 @@ const Home = () => {
 
             {/* Product render */}
             {allProducts.map((item, index) => (
-              <Col lg="3" md="4"  key={index}>
+              <Col lg="3" md="4" key={index}>
                 <ProductCard item={item} />
               </Col>
             ))}

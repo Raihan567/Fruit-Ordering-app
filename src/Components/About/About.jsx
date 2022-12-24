@@ -7,10 +7,10 @@ const About = () => {
     <Container className="mt-5">
       <Row>
         <Col lg="12" className="text-center w-100 m-auto">
-          <h4 className="fs-3 mb-3">
-            Are you want to know more about{" "}
-            <span className=" fs-3 text-danger">Fruitsify?</span>
-          </h4>
+          <p className="fs-3">
+            To know More about <span className="text-danger">Foodsify?</span>
+          </p>
+          
           <p className="text-muted">
             The About Us page of your website is an essential source of
             information for all who want to know more about your business. About{" "}
@@ -19,12 +19,14 @@ const About = () => {
             your work, your company's values, and who you serve.
           </p>
         </Col>
+
         <Col lg="6" md="12">
-          <img className="w-100" src={whyImg} alt="why-fruitsify" />
+          <img className="w-100" src={whyImg} alt="why-foodsify" />
         </Col>
+
         <Col lg="6" md="12" className="mt-5">
           <div className="why__fruitsify">
-            <h2 className="fruitsify__title text-danger">Why Fruitsify?</h2>
+            <h2 className="fruitsify__title text-danger">Why Foodsify?</h2>
             <p>
               I just can't get enough of food delivery app about us. I want to
               get a T-Shirt with food delivery app about us on it so I can show
@@ -45,6 +47,7 @@ const About = () => {
                   saved my business. I love your system
                 </p>
               </ListGroupItem>
+
               <ListGroupItem className="border-0 ps-0">
                 <p className="fs-5 d-flex align-items-center gap-2">
                   {" "}
@@ -57,6 +60,7 @@ const About = () => {
                   could really make use of fruits!.
                 </p>
               </ListGroupItem>
+
               <ListGroupItem className="border-0 ps-0">
                 <p className="fs-5 d-flex align-items-center gap-2">
                   {" "}
@@ -68,6 +72,7 @@ const About = () => {
                   worth a fortune to my company. We were treated like royalty.
                 </p>
               </ListGroupItem>
+
             </ListGroup>
           </div>
         </Col>

@@ -1,9 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const item =
+  localStorage.getItem("cartItem") !== null
+    ? JSON.parse(localStorage.getItem("cartItem"))
+    : [];
+
+const totalAmount =
+  localStorage.getItem("totalAmount") !== null
+    ? JSON.parse(localStorage.getItem("totalAmount"))
+    : 0;
+    
+const totalQuantity =
+  localStorage.getItem("totalQuantity") !== null
+    ? JSON.parse(localStorage.getItem("totalQuantity"))
+    : 0;
+
+const setItemFunc = (item, totalAmount, totalQuantity) => {
+  localStorage.setItem("cartItem", JSON.stringify(item));
+  localStorage.setItem("totalAmount", JSON.stringify(totalAmount));
+  localStorage.setItem("totalQuantity", JSON.stringify(totalQuantity));
+};
+
 const initialState = {
-  cartItem: [],
-  totalQuantity: 0,
-  totalAmount: 0,
+  cartItem: item,
+  totalQuantity: totalQuantity,
+  totalAmount: totalAmount,
 };
 
 const CartSlice = createSlice({
@@ -37,6 +58,17 @@ const CartSlice = createSlice({
         (total, item) => total + Number(item.price) * Number(item.quantity),
         0
       );
+
+      // set the data on localeStorage
+      localStorage.setItem(
+        "cartItem",
+        JSON.stringify(state.cartItem.map((item) => item))
+      );
+      localStorage.setItem("totalAmount", JSON.stringify(state.totalAmount));
+      localStorage.setItem(
+        "totalQuantity",
+        JSON.stringify(state.totalQuantity)
+      );
     },
     // Remove Item
     removeItem(state, action) {
@@ -56,6 +88,13 @@ const CartSlice = createSlice({
         (total, item) => total + Number(item.price) * Number(item.quantity),
         0
       );
+
+      // set the data on localStorage
+      setItemFunc(
+        state.cartItem.map((item) => item),
+        state.totalAmount,
+        state.totalQuantity
+      );
     },
 
     // Delete Item
@@ -70,6 +109,13 @@ const CartSlice = createSlice({
       state.totalAmount = state.cartItem.reduce(
         (total, item) => total + Number(item.price) * Number(item.quantity),
         0
+      );
+
+      // set the data on localStorage
+      setItemFunc(
+        state.cartItem.map((item) => item),
+        state.totalAmount,
+        state.totalQuantity
       );
     },
   },

@@ -4,11 +4,11 @@
 
 # Foodsify- A Food Ordering App
 
-#### Foodsify is a Full-stack React food delivery app. Where user can take order and cancel order requests for different types of products
+#### Foodsify is a Full-stack React food delivery app with firebase authentication. Customers can buy any product and they will be able to do CRUD operations. The UI looks great, and the animation is really well done. The sorting and filtering functionality works well too. Also have nice service list and private routes system.
 
 # Demo
 
-**[website link:] https://polite-tapioca-15a971.netlify.app/**
+**[website link:] https://food-delivery-app-by-raihan.netlify.app/**
 
 ## Deployment
 
@@ -85,13 +85,9 @@ Start the server
   npm run start
 ```
 
-## Lessons Learned
-
-What did you learn while building this project? What challenges did you face and how did you overcome them?
 
 ## 🔗 Links
 
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://dev-portfolio-tawny.vercel.app/)
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/abu-raihan-29a888217//)
 [![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/)
-[![Mail](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](aburaihansarekr567@gmail.com)
